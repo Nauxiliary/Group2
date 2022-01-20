@@ -33,9 +33,9 @@ class Person(BaseModel):
 
 
 class Employee(Person):
-    wage = models.DecimalField(max_digits=2)
-    salary = models.DecimalField(max_digits=2)
-    trained = models.DateField()
+    wage = models.DecimalField(decimal_places=2, max_digits=16)
+    salary = models.DecimalField(decimal_places=2, max_digits=16)
+    trained = models.DateField('trained on')
 
 
 class Client(Person):
@@ -45,6 +45,6 @@ class Client(Person):
 
 class Reference(Person):
     type = models.CharField(max_length=1)
-    last_seen = models.DateField()
+    last_seen = models.DateField('last seen')
     relationship = models.CharField(max_length=50)
 

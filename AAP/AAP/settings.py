@@ -32,11 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'common.models.BaseModel',
-    'common.models.Person',
-    'common.models.Client',
-    'common.models.Employee',
-    'common.models.Reference',
+    'common.apps.CommonConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
