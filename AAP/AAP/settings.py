@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'person',
     'accounts',
 ]
+AUTH_USER_MODEL = 'accounts.GenericUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,3 +133,4 @@ STATIC_ROOT = BASE_DIR / "static_assets"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
