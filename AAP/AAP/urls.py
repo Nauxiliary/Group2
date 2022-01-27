@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from common.views import AppointmentView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/',              admin.site.urls),
+    path('appointments/',       AppointmentView.as_view()),
+    
 ]
