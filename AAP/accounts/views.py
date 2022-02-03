@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-
+from django.contrib import messages
+from .forms import NewUserForm
 
 # Create your views here.
 def index_view(request):
@@ -15,10 +15,13 @@ def dashboard_view(request):
 
 def register_view(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = NewUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+			# login(request, user)
+            messages.success(request, "Registration successful." )
             return redirect('login_url')
+        messages.error(request, "Unsuccessful registration. Invalid information.")
     else:
-        form = UserCreationForm()
+        form = NewUserForm()
     return render(request, 'registration/register.html', {'form': form})
