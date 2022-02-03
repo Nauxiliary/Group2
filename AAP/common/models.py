@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Client
 
 # Create your models here.
 
@@ -103,7 +104,7 @@ class SchedulePet(models.Model):
 
 class Appointment(BaseModel):
     # When client is deleted, all related appointments are also deleted.
-    client = models.ForeignKey('accounts.Client', on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
 
-    request_date = models.DateTimeField("date and time client requested")
+    request_date = models.DateTimeField(default="")
     status = models.CharField(max_length=1)
