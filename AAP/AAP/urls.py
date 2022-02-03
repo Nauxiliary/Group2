@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from common.views import AppointmentView
+# from AAP.accounts import views as accountsViews
 
 urlpatterns = [
     path('admin/',              admin.site.urls),

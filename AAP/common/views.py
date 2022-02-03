@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from common.models import Appointment
+from .models import Appointment
 from django.views.generic import ListView
 
 
