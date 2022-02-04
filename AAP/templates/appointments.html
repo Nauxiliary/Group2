@@ -1,0 +1,14 @@
+{% extends 'main_theme.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<!-- New with Crispy -->
+	<div class="container py-5 register">
+		<h1>Create New Appointment</h1>
+		<form method="POST">
+			{% csrf_token %}
+			{{ form|crispy }}                    
+			<button class="btn btn-primary btn-v-space" type="submit">Submit</button>
+		</form>
+	</div>
+{% endblock %}

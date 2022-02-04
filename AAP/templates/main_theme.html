@@ -14,16 +14,20 @@
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
 
-            <a class="navbar-brand" href="">button b</a>
+            <a class="navbar-brand" href="{% url 'mainhome' %}">Home</a>
 
-            <a class="navbar-brand" href="">button a</a>
+            <a class="navbar-brand" href="{% url 'appointments' %}">Appointments</a>
 
             <ul class="navbar-nav text-light ml-auto">
 
                 {% if user.is_authenticated %}
 
                 <li class="nav-item">
-                    Hello user <a class="nav-link" href="">Log out</a>
+                    {{user.email}}
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                 </li>
 
                 {% else %}
@@ -33,11 +37,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{% url 'login_url' %}">Login</a>
+                    <a class="nav-link" href="{% url 'login_url' %}">Login</a>
                 </li>
 
                 <li class="nav-item">
-                     <a href="{% url 'register_url' %}">Register</a>
+                     <a class="nav-link" href="{% url 'register_url' %}">Register</a>
                 </li>
 
                 {% endif %}
