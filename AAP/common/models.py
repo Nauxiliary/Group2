@@ -1,7 +1,7 @@
-from django.db import models
-from accounts.models import Client
+import sys
 
-# Create your models here.
+from django.conf import settings
+from django.db import models
 
 
 class BaseModel(models.Model):
@@ -12,29 +12,24 @@ class BaseModel(models.Model):
         abstract = True
 
 
-# class Person(BaseModel):
-#
-#     first_name = models.CharField(max_length=35)
-#     last_name = models.CharField(max_length=35)
-#
-#     street_address = models.CharField(max_length=35)
-#     town = models.CharField(max_length=20)
-#     state = models.CharField(max_length=15)
-#     postal = models.CharField(max_length=9)
-#
-#     email = models.CharField(max_length=254)
-#     phone = models.CharField(max_length=15)
-#
-#     username = models.CharField(max_length=70)
-#     password = models.CharField(max_length=255)
-#     # TODO Do we want to store passwords?
-#
-#     class Meta:
-#         abstract = True
+class BasePerson(BaseModel):
+    email = models.EmailField(max_length=254, unique=True)
+    telephone = models.CharField(max_length=15)
+    telephone_2 = models.CharField(max_length=15)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    street = models.CharField(max_length=100)
+    city = models.CharField(max_length=40)
+    state = models.CharField(max_length=2)
+
+
+class Reference(BasePerson):
+    type = models.CharField(max_length=1)
+    relationship = models.CharField(max_length=50)
 
 
 class Vaccine(BaseModel):
-    administered_by = models.ManyToManyField('accounts.Reference', through="VaccineReference")
+    administered_by = models.ManyToManyField(Reference, through="VaccineReference")
     local_name = models.CharField(max_length=100)
     date_administered = models.DateField("date pet was administered vaccine")
 
@@ -43,11 +38,12 @@ class VaccineReference(models.Model):
     # Cannot delete reference if administered vaccine.
     vaccine = models.ForeignKey(Vaccine, on_delete=models.PROTECT)
     # Delete all vaccines if reference is deleted.
-    reference = models.ForeignKey('accounts.Reference', on_delete=models.CASCADE)
+    reference = models.ForeignKey(Reference, on_delete=models.CASCADE)
 
 
 class Pet(BaseModel):
     # Cannot delete vaccine if tied to pet.
+    owner = models.ManyToManyField(settings.AUTH_USER_MODEL)
     vaccine = models.ManyToManyField(Vaccine, through="PetVaccine")
 
     breed = models.CharField(max_length=255)
@@ -67,7 +63,7 @@ class PetVaccine(models.Model):
 class Form(BaseModel):
     # When deleting the client, do not delete all forms.
     # Forms must first be dealt with before deleting the client.
-    client = models.ForeignKey('accounts.Client', on_delete=models.PROTECT)
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
     pet = models.ManyToManyField(Pet, blank=False, through="PetForm")
 
@@ -82,29 +78,29 @@ class PetForm(models.Model):
     form = models.ForeignKey(Form, on_delete=models.PROTECT)
 
 
-class Schedule(BaseModel):
-    employee = models.ManyToManyField('accounts.Employee', through="ScheduleEmployee")
-    pet = models.ManyToManyField(Pet, through="SchedulePet")
+# class Schedule(BaseModel):
+#     employee = models.ManyToManyField(Employee, through="ScheduleEmployee")
+#     pet = models.ManyToManyField(Pet, through="SchedulePet")
+#
+#
+# class ScheduleEmployee(models.Model):
+#     # When deleting the schedule, do not delete associated employee.
+#     # Employee must first be dealt with before deleting the schedule.
+#     schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
+#     employee = models.ForeignKey('accounts.Employee', on_delete=models.PROTECT)
+#
+#     relation = models.CharField(max_length=1)
 
 
-class ScheduleEmployee(models.Model):
-    # When deleting the schedule, do not delete associated employee.
-    # Employee must first be dealt with before deleting the schedule.
-    schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
-    employee = models.ForeignKey('accounts.Employee', on_delete=models.PROTECT)
-
-    relation = models.CharField(max_length=1)
-
-
-class SchedulePet(models.Model):
-    schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
-    # When a pet is deleted, delete all schedules with said pet.
-    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+# class SchedulePet(models.Model):
+#     schedule = models.ForeignKey(Schedule, on_delete=models.PROTECT)
+#     # When a pet is deleted, delete all schedules with said pet.
+#     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
 
 
 class Appointment(BaseModel):
     # When client is deleted, all related appointments are also deleted.
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
 
-    request_date = models.DateTimeField(default="")
+    request_date = models.DateTimeField("date and time client requested")
     status = models.CharField(max_length=1)

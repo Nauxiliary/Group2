@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from common.views import AppointmentView, AppointmentListView
 from common import views
+# from AAP.accounts import views as accountsViews
 
 urlpatterns = [
     path('admin/',              admin.site.urls),
