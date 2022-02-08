@@ -2,6 +2,7 @@ import sys
 
 from django.conf import settings
 from django.db import models
+from accounts.models import User
 
 
 class BaseModel(models.Model):
@@ -29,7 +30,8 @@ class Reference(BasePerson):
 
 
 class Vaccine(BaseModel):
-    administered_by = models.ManyToManyField(Reference, through="VaccineReference")
+    administered_by = models.ManyToManyField(
+        Reference, through="VaccineReference")
     local_name = models.CharField(max_length=100)
     date_administered = models.DateField("date pet was administered vaccine")
 
@@ -63,7 +65,8 @@ class PetVaccine(models.Model):
 class Form(BaseModel):
     # When deleting the client, do not delete all forms.
     # Forms must first be dealt with before deleting the client.
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    client = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
     pet = models.ManyToManyField(Pet, blank=False, through="PetForm")
 
@@ -100,7 +103,7 @@ class PetForm(models.Model):
 
 class Appointment(BaseModel):
     # When client is deleted, all related appointments are also deleted.
-    client = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    client = models.ForeignKey(User, on_delete=models.CASCADE)
 
     request_date = models.DateTimeField("date and time client requested")
     status = models.CharField(max_length=1)
