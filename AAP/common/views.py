@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from common.models import Appointment
-from accounts.models import Client
 from django.views.generic import CreateView, ListView
 from django.contrib import messages
 
@@ -30,7 +29,7 @@ def appointment(request):
             
             if form.is_valid():
                 obj = form.save(commit=False)
-                obj.client = Client.objects.get(pk=request.user.id)
+                #obj.client = Client.objects.get(pk=request.user.id)
                 obj.save()
             else:
                 print("ERROR : Form is invalid")
