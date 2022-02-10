@@ -21,5 +21,7 @@ urlpatterns = [
     path('admin/',              admin.site.urls),
     path('',                    views.index_view, name="mainhome"),
     path('appointments/',       views.request_appointment_view, name='appointments'),
-    path('accounts/', include('accounts.urls'))
+    path('petregister', views.add_pet_view, name="petregister"),
+
+    path('accounts/', include('accounts.urls')),
 ]

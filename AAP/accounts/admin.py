@@ -61,10 +61,10 @@ class ClientAdmin(UserAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('username', 'password')
+            'fields': ('email', 'password')
         }),
         ('Personal info', {
-            'fields': ('first_name', 'last_name', 'email')
+            'fields': ('first_name', 'last_name')
         }),
         ('Permissions', {
             'fields': (
