@@ -2,14 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<!-- New with Crispy -->
-	<div class="container py-5 register">
+	<div class="container px-4 py-4 shadow rounded box-6">
 		<h1>Create New Account</h1>
 		<form method="POST">
 			{% csrf_token %}
 			{{ form|crispy }}                    
 			<button class="btn btn-primary btn-v-space" type="submit">Register</button>
 		</form>
-		<p class="text-left">If you already have an account, <a href="/login">login</a> instead.</p>
+		<p class="form-text text-muted">If you already have an account, <a href="{% url 'login_url' %}">login</a> instead.</p>
 	</div>
 {% endblock %}

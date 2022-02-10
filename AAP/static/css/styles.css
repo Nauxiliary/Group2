@@ -1,7 +1,11 @@
+body {
+    background-color: whitesmoke;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: inherit;
   font-weight: 300;
-  line-height: 1.75em;
+  line-height: 1.5em;
   /* margin-bottom: 1em; */
   /* text-transform: uppercase;  */
 }
@@ -12,9 +16,14 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   border: 0;
 }
 
+h1 {
+  font-size: 2.0em;
+  letter-spacing: 0.05em;
+}
+
 h2 {
   font-size: 1.5em;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 h3 {
@@ -22,10 +31,68 @@ h3 {
   letter-spacing: 0.025em;
 }
 
-.register {
-  max-width: 500px;
+.form-group {
+  margin: 3px 0px;
 }
 
+.register {
+  max-width: 600px;
+}
+
+.box-6 {
+    background-color: white;
+    max-width: 600px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.box-8 {
+    background-color: white;
+    max-width: 800px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+  
 .btn-v-space {
-  margin-top: 10px;
+  margin: 10px 0px;
+}
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.nav-menu li {
+  list-style: none;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #F5F5F5;
+  margin: 1px 5px 1px 5px;
+}
+
+.nav-menu li a:hover {
+  border: 1px solid white;
+  background-color: rgb(66, 66, 66);
+  margin: 0px 4px 0px 4px;
+}
+
+.nav-menu-a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.nav-item-acct {
+  margin: 2px 0px 2px 0px;
+}
+
+.nav-links-acct {
+  display: inline;
 }

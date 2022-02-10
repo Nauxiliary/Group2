@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container px-4 py-4 shadow rounded box-8">
+        <h1>Update Personal Information</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}                    
+            <button type="submit" class="btn btn-primary btn-v-space">Save Changes</button>
+            <button type="reset" class="btn btn-primary btn-v-space">Reset</button>
+        </form>
+    </div>
+{% endblock %}

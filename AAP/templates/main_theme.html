@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: whitesmoke;">
 
 <head>
     <meta charset="UTF-8">
@@ -12,41 +12,40 @@
 {% block menu %}
 
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
+        <div class="container-fluid">
 
             <a class="navbar-brand" href="{% url 'mainhome' %}">Home</a>
 
-            <a class="navbar-brand" href="{% url 'appointments' %}">Appointments</a>
-
-            <ul class="navbar-nav text-light ml-auto">
-
+            <ul class="nav-menu">
                 {% if user.is_authenticated %}
+                <li><a class="nav-menu-a" href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li><a class="nav-menu-a" href="{% url 'appointments' %}">Appointments</a></li>
+                <li><a class="nav-menu-a" href="{% url 'profile' %}">Account</a></li>
+                {% endif %}
+            </ul>
 
-                <li class="nav-item">
+            <div>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav text-light">
+                <li class="nav-item-acct">
                     {{user.email}}
                 </li>
-
-                <li class="nav-item">
+                <li class="nav-item-acct">
                     <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                 </li>
-
-                {% else %}
-
-                <li class="nav-item">
+            </ul>
+            {% else %}
+            <ul class="navbar-nav text-light">
+                <li class="nav-item-acct">
                     You are not logged in.
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login_url' %}">Login</a>
+                <li class="nav-item-acct">
+                    <a class="nav-link nav-links-acct" href="{% url 'login_url' %}">Login</a> &bull;
+                    <a class="nav-link nav-links-acct" href="{% url 'register_url' %}">Register</a>
                 </li>
-
-                <li class="nav-item">
-                     <a class="nav-link" href="{% url 'register_url' %}">Register</a>
-                </li>
-
-                {% endif %}
-
             </ul>
+            {% endif %}
+            </div>
         </div>
 
     </nav>
