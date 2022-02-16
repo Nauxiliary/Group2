@@ -22,6 +22,21 @@ class NewUserForm(UserCreationForm):
         return user
 
 
+class NewStaffMemberForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+
+    class Meta:
+        model = get_user_model()
+        fields=("email","password1","password2")
+
+    def save(self, commit=True):
+        user = super(NewStaffMemberForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.is_staff = True
+        if commit:
+            user.save()
+        return user
+
 class UpdateUserForm(forms.ModelForm):
     telephone_2 = forms.CharField(required=False)
     email = forms.CharField(required=False)

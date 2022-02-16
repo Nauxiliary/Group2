@@ -1,8 +1,8 @@
+import datetime
 import sys
 
 from django.conf import settings
 from django.db import models
-from accounts.models import User
 
 
 class BaseModel(models.Model):
@@ -45,21 +45,28 @@ class VaccineReference(models.Model):
 
 class Pet(BaseModel):
     # Cannot delete vaccine if tied to pet.
-    owner = models.ManyToManyField(settings.AUTH_USER_MODEL)
-    vaccine = models.ManyToManyField(Vaccine, through="PetVaccine")
+    owner = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                   through="PetOwner", related_name="owner")
+    vaccine = models.ManyToManyField(Vaccine, through="PetVaccine", related_name="vaccine")
 
+    name = models.CharField(max_length=100)
     breed = models.CharField(max_length=255)
-    condition = models.CharField(max_length=255)
-    special_instructions = models.CharField(max_length=255)
-    last_seen = models.DateTimeField('pet last seen')
-    picture = models.BinaryField()
-    temperament = models.CharField(max_length=1)
-    clip = models.CharField(max_length=255)
+    condition = models.CharField(max_length=255, blank=True)
+    special_instructions = models.CharField(max_length=255, blank=True)
+    last_seen = models.DateTimeField('pet last seen', blank=True, default=datetime.date.today())
+    picture = models.ImageField(upload_to='petimages/', blank=True)
+    temperament = models.CharField(max_length=1, blank=True)
+    clip = models.CharField(max_length=255, blank=True)
 
 
 class PetVaccine(models.Model):
-    pet = models.ForeignKey(Pet, on_delete=models.PROTECT)
-    vaccine = models.ForeignKey(Vaccine, on_delete=models.PROTECT)
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    vaccine = models.ForeignKey(Vaccine, on_delete=models.CASCADE)
+
+
+class PetOwner(models.Model):
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Form(BaseModel):
@@ -103,7 +110,7 @@ class PetForm(models.Model):
 
 class Appointment(BaseModel):
     # When client is deleted, all related appointments are also deleted.
-    client = models.ForeignKey(User, on_delete=models.CASCADE)
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     request_date = models.DateTimeField("date and time client requested")
     status = models.CharField(max_length=1)

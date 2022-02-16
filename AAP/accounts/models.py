@@ -16,6 +16,7 @@ class UserProfileManager(BaseUserManager):
 
         client.set_password(password)
         client.save(using=self.db)
+        client.is_staff = False
 
         return client
 
@@ -25,6 +26,7 @@ class UserProfileManager(BaseUserManager):
         # user.is_superuser = True
         # user.is_staff = True
         user.is_admin = True
+        user.is_staff = True
 
         user.save(using=self.db)
 
@@ -68,4 +70,5 @@ class User(AbstractUser, PermissionsMixin):
 
     @property
     def is_staff(self):
-        return self.is_staff
+        print(self.is_admin)
+        return self.is_admin
