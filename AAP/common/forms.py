@@ -11,7 +11,6 @@ class requestAppointmentForm(ModelForm):
 
     class Meta:
         model = Appointment
-
         fields = ["request_date", "pet"]
 
     def save(self, commit=True):
