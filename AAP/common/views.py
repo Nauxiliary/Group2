@@ -4,6 +4,8 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from .forms import requestAppointmentForm, addPetForm
 from accounts.models import User
+from common.models import Appointment
+from django.views.generic import ListView
 
 
 def index_view(request):
@@ -27,6 +29,11 @@ def request_appointment_view(request):
         form = requestAppointmentForm()
 
     return render(request, 'appointments.html', {'form': form})
+
+@login_required()
+class AppointmentView(ListView):
+    model = Appointment
+    template_name = 'appointments.html'
 
 
 @staff_member_required

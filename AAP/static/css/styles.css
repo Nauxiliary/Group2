@@ -96,3 +96,47 @@ h3 {
 .nav-links-acct {
   display: inline;
 }
+
+
+.clickablePics {
+   width: 400px;
+   height: 375px;
+   border-style: outset;
+   border-radius: 3px;
+   border-color: darkslateblue;
+   
+
+}
+
+.row {
+  padding-top: 50px;
+  padding-bottom: 25px;
+   width: 100%;
+   text-align: center;
+   display: block;
+   margin: auto;
+}
+
+.linkBlock {
+  position: relative;
+}
+
+.linkBlock h3 {
+  position: absolute;
+  font-weight: bold;
+  color: darkslateblue;
+  left: 15px;
+  top: 175px;
+}
+
+.summaryText {
+  padding-left: 50px;
+  padding-right: 50px;
+  font-weight: 400;
+}
+
+
+.clickablePics:hover {
+  opacity: .4;
+ 
+}

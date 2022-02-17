@@ -5,7 +5,20 @@ from django.contrib.auth import get_user_model
 from .models import User
 
 
+STATES = (
+    ('', 'Choose...'),
+    ('CO', 'Colorado'),
+    ('AZ', 'Arizona'),
+    ('NY', 'New York')
+)
+
+
+
+
 class NewUserForm(UserCreationForm):
+    last_name = forms.CharField(required=True)
+    first_name = forms.CharField(required=True)
+    
     email = forms.EmailField(required=True)
 
     class Meta:
@@ -20,6 +33,11 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    street = forms.CharField(required=True)
+    city = forms.CharField(required=True)
+    state = forms.ChoiceField(choices=STATES)
+    phone_number = forms.CharField(max_length=12)
+    
 
 
 class NewStaffMemberForm(UserCreationForm):
