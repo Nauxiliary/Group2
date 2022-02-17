@@ -13,7 +13,6 @@ def index_view(request):
 
 class AppointmentView(LoginRequiredMixin, CreateView):
     form_class = requestAppointmentForm
-    #fields = ['request_date', 'pet']
     success_url = '/appointments'
     template_name = 'appointments.html'
 
@@ -25,6 +24,8 @@ class AppointmentView(LoginRequiredMixin, CreateView):
         form.instance.client = self.request.user
         return super().form_valid(form)
 
+# V This is the old function view replaced by the class view above. V
+# 
 # @login_required()
 # def request_appointment_view(request):
 #     if request.method == "POST":
