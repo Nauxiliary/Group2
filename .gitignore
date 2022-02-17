@@ -137,3 +137,5 @@ GitHub.sublime-settings
 .history
 AAP/settings_local.py
 AAP/.vscode/launch.json
+/venv/
+/migrations/

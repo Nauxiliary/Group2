@@ -1,12 +1,18 @@
+# -*- coding: utf-8 -*-
+
 from django.forms import ModelForm
 from django import forms
-from .models import Appointment, Pet
+from .models import Appointment, Pet, PetOwner
+from django.conf import settings
 
 
 class requestAppointmentForm(ModelForm):
+    pets = Pet.objects.all()
+
     class Meta:
         model = Appointment
-        fields = ["request_date"]
+
+        fields = ["request_date", "pet"]
 
     def save(self, commit=True):
         appt = super(requestAppointmentForm, self).save(commit=False)

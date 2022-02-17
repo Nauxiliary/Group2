@@ -55,6 +55,7 @@ class NewStaffMemberForm(UserCreationForm):
             user.save()
         return user
 
+
 class UpdateUserForm(forms.ModelForm):
     telephone_2 = forms.CharField(required=False)
     email = forms.CharField(required=False)

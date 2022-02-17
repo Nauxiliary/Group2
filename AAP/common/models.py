@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+
 import datetime
 import sys
 
 from django.conf import settings
 from django.db import models
+from django.utils.timezone import now
 
 
 class BaseModel(models.Model):
@@ -53,10 +56,16 @@ class Pet(BaseModel):
     breed = models.CharField(max_length=255)
     condition = models.CharField(max_length=255, blank=True)
     special_instructions = models.CharField(max_length=255, blank=True)
-    last_seen = models.DateTimeField('pet last seen', blank=True, default=datetime.date.today())
+    last_seen = models.DateTimeField('pet last seen', blank=True, default=now)
     picture = models.ImageField(upload_to='petimages/', blank=True)
     temperament = models.CharField(max_length=1, blank=True)
     clip = models.CharField(max_length=255, blank=True)
+
+    def __unicode__(self):
+        pretty = self.name
+        if self.breed != "":
+            pretty += "(%s)" % self.breed
+        return pretty
 
 
 class PetVaccine(models.Model):
@@ -111,6 +120,7 @@ class PetForm(models.Model):
 class Appointment(BaseModel):
     # When client is deleted, all related appointments are also deleted.
     client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    pet = models.ForeignKey(Pet, on_delete=models.PROTECT)
 
     request_date = models.DateTimeField("date and time client requested")
     status = models.CharField(max_length=1)
