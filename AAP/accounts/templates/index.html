@@ -2,15 +2,37 @@
 
 <body>
     {% block content %}
-        <h1>Welcome Home , from Homepage </h1>
-        {% if user.is_authenticated %}
-             <a href="{% url 'logout' %}">Logout</a>
+        
+        <!-- <div class="textRow">
+            <h2>profile</h2>
+            <h2>Appointments</h2>
+            <h2>Register</h2>
+        </div> -->
+        <div class="row">
 
-        {% else %}
-            <a href="{% url 'login_url' %}">Login</a>
-            <a href="{% url 'register_url' %}">Register</a>
+            <a class="linkBlock" href="{% url 'profile' %}">
+                <img class="clickablePics" src="static\pfp.jpg" />
+                <h3>View Profile</h3>
+            </a>
 
-        {% endif %}
 
+            <a class="linkBlock"  href="{% url 'appointments' %}">
+                <img class="clickablePics" src="static\apmts.jpg" />
+                <h3>Manage Appointments</h3>
+            </a>
+        
+
+            <a class="linkBlock"  href="{% url 'appointments' %}">
+                <img class="clickablePics" src="static\doghair.jpg" />
+                <h3>Register Your Pet(s)</h3>
+            </a>
+
+        </div>
+
+        <div>
+            <h2 class="summaryText">Welcome to the All About Paws Pet Spa! From this page, you can view your profile, appointments and pet registration information. If you get lost, the link on the top can also take you where you need to go!</h2>
+        </div>
+        
+        
     {% endblock %}
 </body>
