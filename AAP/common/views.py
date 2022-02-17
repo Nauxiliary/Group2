@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import requestAppointmentForm
+from .forms import requestAppointmentForm, addPetForm
 from accounts.models import User
 
 
@@ -26,3 +26,22 @@ def request_appointment_view(request):
         form = requestAppointmentForm()
 
     return render(request, 'appointments.html', {'form': form})
+
+
+@login_required()
+def add_pet_view(request):
+    if request.method == "POST":
+        form = addPetForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.client = User.objects.get(pk=request.user.id)
+            obj.status = 0
+            obj.save()
+            messages.success(request, "Pet added.")
+            return redirect('appointments')
+        else:
+            messages.error(request, "Something went wrong. Request not sent.")
+    else:
+        form = addPetForm()
+
+    return render(request, 'petregister.html', {'form': form})

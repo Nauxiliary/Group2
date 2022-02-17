@@ -4,7 +4,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from .models import User
 
-# Create your forms here.
 
 STATES = (
     ('', 'Choose...'),
@@ -39,6 +38,7 @@ class NewUserForm(UserCreationForm):
     state = forms.ChoiceField(choices=STATES)
     phone_number = forms.CharField(max_length=12)
     
+
 
 class UpdateUserForm(forms.ModelForm):
     telephone_2 = forms.CharField(required=False)

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import NewUserForm, UpdateUserForm
 
-# Create your views here.
+
 def index_view(request):
     return render(request, 'index.html')
 
@@ -25,6 +25,7 @@ def register_view(request):
     else:
         form = NewUserForm()
     return render(request, 'registration/register.html', {'form': form})
+
 
 @login_required()
 def profile_view(request):
