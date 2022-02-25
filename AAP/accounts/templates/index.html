@@ -3,13 +3,8 @@
 <body>
     {% block content %}
         
-        <!-- <div class="textRow">
-            <h2>profile</h2>
-            <h2>Appointments</h2>
-            <h2>Register</h2>
-        </div> -->
+    <div class="container">
         <div class="row">
-
             <a class="linkBlock" href="{% url 'profile' %}">
                 <img class="clickablePics" src="static\pfp.jpg" />
                 <h3>View Profile</h3>
@@ -26,12 +21,12 @@
                 <img class="clickablePics" src="static\doghair.jpg" />
                 <h3>Register Your Pet(s)</h3>
             </a>
-
         </div>
+    </div>
 
-        <div>
-            <h2 class="summaryText">Welcome to the All About Paws Pet Spa! From this page, you can view your profile, appointments and pet registration information. If you get lost, the link on the top can also take you where you need to go!</h2>
-        </div>
+    <div>
+        <h3 class="summaryText">Welcome to the All About Paws Pet Spa! From this page, you can view your profile, appointments and pet registration information. If you get lost, the link on the top can also take you where you need to go!</h3>
+    </div>
         
         
     {% endblock %}

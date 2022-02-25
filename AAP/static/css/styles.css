@@ -57,36 +57,28 @@ h3 {
   margin: 10px 0px;
 }
 
+#ul-wrapper > ul > li > a {
+    display: block;
+    color: #F5F5F5;
+    margin: 1px 5px 1px 5px;
+    padding: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+#ul-wrapper > ul > li > a:hover {
+    border: 1px solid white;
+    background-color: rgb(66, 66, 66);
+    margin: 0px 4px 0px 4px;
+}
+
 .nav-menu {
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-transform: uppercase;
-}
-
-.nav-menu li {
-  list-style: none;
-}
-
-.nav-menu a {
-  text-decoration: none;
-  color: #F5F5F5;
-  margin: 1px 5px 1px 5px;
-}
-
-.nav-menu li a:hover {
-  border: 1px solid white;
-  background-color: rgb(66, 66, 66);
-  margin: 0px 4px 0px 4px;
-}
-
-.nav-menu-a {
-  display: block;
-  padding: 5px;
-  text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .nav-item-acct {
@@ -97,15 +89,12 @@ h3 {
   display: inline;
 }
 
-
 .clickablePics {
-   width: 400px;
-   height: 375px;
+   width: 250px;
+   height: 250px;
    border-style: outset;
    border-radius: 3px;
    border-color: darkslateblue;
-   
-
 }
 
 .row {
@@ -125,8 +114,8 @@ h3 {
   position: absolute;
   font-weight: bold;
   color: darkslateblue;
-  left: 15px;
-  top: 175px;
+  left: 18px;
+  top: 111px;
 }
 
 .summaryText {
@@ -138,5 +127,16 @@ h3 {
 
 .clickablePics:hover {
   opacity: .4;
- 
+}
+
+/* Same as bootstraps .alert-danger - Used for messages */
+.alert-error {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.svgpad-r10 {
+    vertical-align: middle;
+    padding-right: 10px;
 }
