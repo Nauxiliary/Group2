@@ -124,3 +124,6 @@ class Appointment(BaseModel):
 
     request_date = models.DateTimeField("date and time client requested")
     status = models.CharField(max_length=1)
+
+    class Meta:
+        ordering = ["-request_date", "pet"]

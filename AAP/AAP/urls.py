@@ -21,7 +21,9 @@ from common.views import AppointmentView
 urlpatterns = [
     path('admin/',              admin.site.urls),
     path('',                    views.index_view, name="mainhome"),
-    path('appointments/',       AppointmentView.as_view(), name='appointments'),
+    path(r'^appointments/$', AppointmentView.as_view(
+        template_name='appointments.html', success_url='/appointments'),
+         name='appointments'),
     path('petregister/', views.add_pet_view, name="petregister"),
 
     path('accounts/', include('accounts.urls')),
