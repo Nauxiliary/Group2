@@ -92,9 +92,10 @@ h3 {
 .clickablePics {
    width: 250px;
    height: 250px;
-   border-style: outset;
-   border-radius: 3px;
-   border-color: darkslateblue;
+   border-style: solid;
+   border-radius: 10px;
+   border-width: 5px;
+   border-color: black;
 }
 
 .row {
@@ -108,6 +109,7 @@ h3 {
 
 .linkBlock {
   position: relative;
+  color: white;
 }
 
 .linkBlock h3 {

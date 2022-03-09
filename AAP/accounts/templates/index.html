@@ -2,31 +2,44 @@
 
 <body>
     {% block content %}
+    <div>
+        <h3 class="summaryText">Welcome to the All About Paws Pet Spa! From this page, you can view your profile,
+            appointments and pet registration information. If you get lost, the link on the top can also take you where you
+            need to go!</h3>
+    </div>
         
     <div class="container">
         <div class="row">
             <a class="linkBlock" href="{% url 'profile' %}">
-                <img class="clickablePics" src="static\pfp.jpg" />
-                <h3>View Profile</h3>
+                <img class="clickablePics" src="static\pfp.jpg"/>
+                
             </a>
+            
 
 
             <a class="linkBlock"  href="{% url 'appointments' %}">
-                <img class="clickablePics" src="static\apmts.jpg" />
-                <h3>Manage Appointments</h3>
+                <img class="clickablePics" src="static\apmts.jpg"/>
+                
             </a>
+            
         
-
+            <!-- need to add in the register url -->
             <a class="linkBlock"  href="{% url 'appointments' %}">
-                <img class="clickablePics" src="static\doghair.jpg" />
-                <h3>Register Your Pet(s)</h3>
+                <img class="clickablePics" src="static\doghair.jpg"/>
+                
             </a>
+            
+        </div>
+        <div class="row"> 
+            <a href="{% url 'profile' %}">View Profile</a>
+            <a href="{% url 'appointments' %}">Manage Appointments</a>
+            <!-- need to add in the register url -->
+            <a href="{% url 'appointments' %}">Register Your Pet(s)</a> 
+
         </div>
     </div>
 
-    <div>
-        <h3 class="summaryText">Welcome to the All About Paws Pet Spa! From this page, you can view your profile, appointments and pet registration information. If you get lost, the link on the top can also take you where you need to go!</h3>
-    </div>
+    
         
         
     {% endblock %}
